@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
+  <!-- Definitions for Gradients and Filters -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="200" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="glossGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="white" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="white" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="50" y1="50" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2dd4bf" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 1. Shield Body -->
+  <path d="M100 230 C 40 210 20 160 20 60 L 100 20 L 180 60 C 180 160 160 210 100 230 Z" 
+        fill="url(#shieldGrad)" stroke="#1e40af" stroke-width="4" />
+  
+  <!-- Gloss Effect -->
+  <path d="M100 230 C 40 210 20 160 20 60 L 100 20 L 140 40 C 40 60 60 200 100 230 Z" 
+        fill="url(#glossGrad)" />
+
+  <!-- 2. Brain Icon (Top) -->
+  <g transform="translate(70, 0) scale(0.6)">
+     <path d="M50 20 C 30 20 10 40 10 60 C 10 75 20 85 30 90 M 50 20 C 70 20 90 40 90 60 C 90 75 80 85 70 90 " 
+           stroke="white" stroke-width="4" fill="none" stroke-linecap="round" />
+     <path d="M50 20 L 50 90" stroke="white" stroke-width="4" stroke-linecap="round" />
+     <path d="M25 40 L 40 50 M 75 40 L 60 50" stroke="white" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- 3. Stylized 'N' with Circuits -->
+  <g transform="translate(50, 60)">
+    <!-- Main N Shape -->
+    <path d="M20 100 L 20 20 L 80 100 L 80 20" 
+          stroke="#cbd5e1" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Circuit Lines (Teal) -->
+    <path d="M15 30 C -5 50 -10 80 10 90" stroke="#2dd4bf" stroke-width="3" fill="none" filter="url(#glow)" />
+    <circle cx="10" cy="90" r="3" fill="#2dd4bf" />
+    
+    <path d="M85 90 C 105 70 110 40 90 30" stroke="#2dd4bf" stroke-width="3" fill="none" filter="url(#glow)" />
+    <circle cx="90" cy="30" r="3" fill="#2dd4bf" />
+    
+    <!-- Crossing Circuit -->
+    <path d="M30 60 L 70 60" stroke="#2dd4bf" stroke-width="3" fill="none" filter="url(#glow)" />
+    <circle cx="30" cy="60" r="3" fill="#2dd4bf" />
+    <circle cx="70" cy="60" r="3" fill="#2dd4bf" />
+  </g>
+
+  <!-- 4. Upload Arrow (Bottom) -->
+  <g transform="translate(70, 170) scale(0.6)">
+    <circle cx="50" cy="50" r="35" stroke="#2dd4bf" stroke-width="5" fill="none" stroke-dasharray="160" stroke-dashoffset="40" />
+    <path d="M50 70 L 50 30 M 35 45 L 50 30 L 65 45" stroke="#2dd4bf" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>
