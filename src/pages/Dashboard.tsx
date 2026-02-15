@@ -15,6 +15,8 @@ const quickAccessRow2 = [
     { label: "Fees", icon: "receipt_long", route: "/fees" },
     { label: "Hostel & Mess", icon: "apartment", route: "/campus-dining" },
     { label: "Digital ID", icon: "badge", route: "/student-profile" },
+    { label: "Campus Market", icon: "storefront", route: "/campus-market" },
+    { label: "Lost & Found", icon: "search_check", route: "/lost-found" },
 ];
 
 /* ── Real attendance data from the app screenshots (exact values) ── */
@@ -287,25 +289,13 @@ export default function Dashboard() {
 
                         {/* ─── TAB 0 : HOME ─── */}
                         <div className="w-full flex-shrink-0 px-4">
-                            {/* Quick Access */}
                             <div className="mb-5">
                                 <div className="flex items-center gap-2 mb-3">
                                     <span className="material-symbols-outlined text-blue-400 text-[20px]">grid_view</span>
                                     <h2 className="text-sm font-bold dark:text-white">Quick Access</h2>
                                 </div>
-                                <div className="grid grid-cols-4 gap-2.5">
-                                    {quickAccessRow1.map((item) => (
-                                        <button key={item.label} onClick={() => navigate(item.route)} className="flex flex-col items-center gap-1.5 group">
-                                            <div className={`size-12 rounded-xl ${isDark ? "bg-blue-500/10" : "bg-primary/10"} flex items-center justify-center ${isDark ? "text-blue-400" : "text-primary"} transition-all group-hover:scale-105 group-active:scale-95 shadow-sm`}>
-                                                <span className="material-symbols-outlined text-[22px]">{item.icon}</span>
-                                            </div>
-                                            <span className={`text-[10px] font-medium ${subText} text-center leading-tight`}>{item.label}</span>
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <div className={`grid grid-cols-4 gap-2.5 overflow-hidden transition-all duration-300 ${showMoreApps ? "max-h-24 opacity-100 mt-2.5" : "max-h-0 opacity-0 mt-0"}`}>
-                                    {quickAccessRow2.map((item) => (
+                                <div className={`grid grid-cols-4 gap-2.5 transition-all duration-300 ${showMoreApps ? "max-h-64 overflow-y-auto scrollbar-hide pb-2" : "max-h-24 overflow-hidden"}`}>
+                                    {[...quickAccessRow1, ...quickAccessRow2].map((item) => (
                                         <button key={item.label} onClick={() => navigate(item.route)} className="flex flex-col items-center gap-1.5 group">
                                             <div className={`size-12 rounded-xl ${isDark ? "bg-blue-500/10" : "bg-primary/10"} flex items-center justify-center ${isDark ? "text-blue-400" : "text-primary"} transition-all group-hover:scale-105 group-active:scale-95 shadow-sm`}>
                                                 <span className="material-symbols-outlined text-[22px]">{item.icon}</span>
@@ -317,7 +307,7 @@ export default function Dashboard() {
 
                                 <button onClick={() => setShowMoreApps(!showMoreApps)} className={`w-full flex items-center justify-center gap-1 mt-2 py-1 text-xs font-medium ${subText} hover:text-blue-400 transition-colors`}>
                                     <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${showMoreApps ? "rotate-180" : ""}`}>expand_more</span>
-                                    {showMoreApps ? "Show Less" : "More"}
+                                    {showMoreApps ? "Show Less" : "Show More"}
                                 </button>
                             </div>
 

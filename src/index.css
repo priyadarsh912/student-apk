@@ -135,4 +135,16 @@
   .animate-slide-up {
     animation: slide-up 0.3s ease-out;
   }
+
+  /* Global scrollbar hide */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
 }
