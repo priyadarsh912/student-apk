@@ -1,135 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* NEXUS Design System - Premium College Dashboard */
-/* Deep Indigo + Teal/Cyan with Apple-level polish */
-
 @layer base {
   :root {
-    /* Core palette - Deep Indigo Primary */
     --background: 220 20% 98%;
     --foreground: 222 47% 11%;
-
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-
-    /* Deep Indigo Primary */
-    --primary: 239 84% 67%;
+    --primary: 214 83% 51%;
     --primary-foreground: 0 0% 100%;
-
-    /* Electric Blue Secondary */
-    --secondary: 217 91% 60%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Muted tones */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
-
-    /* Teal/Cyan Accent */
-    --accent: 173 80% 40%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Emergency Red */
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
-    /* Status Colors */
     --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-
-    /* Borders and inputs */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 239 84% 67%;
-
+    --ring: 214 83% 51%;
     --radius: 0.75rem;
 
-    /* Sidebar - Light mode */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary: 214 83% 51%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 14% 96%;
     --sidebar-accent-foreground: 222 47% 11%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 239 84% 67%;
-
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%) 0%, hsl(217 91% 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(173 80% 40%) 0%, hsl(186 69% 45%) 100%);
-    --gradient-emergency: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(15 70% 50%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(239 84% 67% / 0.1) 0%, hsl(173 80% 40% / 0.1) 100%);
-
-    /* Shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(220 20% 10% / 0.08), 0 4px 16px -4px hsl(220 20% 10% / 0.06);
-    --shadow-medium: 0 4px 12px -3px hsl(220 20% 10% / 0.12), 0 8px 24px -6px hsl(220 20% 10% / 0.1);
-    --shadow-glow: 0 0 20px hsl(239 84% 67% / 0.25);
-    --shadow-emergency: 0 0 30px hsl(0 84% 60% / 0.4);
+    --sidebar-ring: 214 83% 51%;
   }
 
   .dark {
-    /* Dark mode - Notion/Linear inspired */
-    --background: 222 47% 7%;
+    --background: 225 25% 5%;
     --foreground: 210 40% 98%;
-
-    --card: 222 47% 11%;
+    --card: 225 18% 10%;
     --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 11%;
+    --popover: 225 18% 10%;
     --popover-foreground: 210 40% 98%;
-
-    /* Brighter primary in dark mode */
-    --primary: 239 84% 70%;
-    --primary-foreground: 222 47% 7%;
-
-    --secondary: 217 91% 65%;
-    --secondary-foreground: 222 47% 7%;
-
-    --muted: 217 33% 17%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 14% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 225 14% 14%;
     --muted-foreground: 215 20% 65%;
-
-    --accent: 173 80% 45%;
-    --accent-foreground: 222 47% 7%;
-
+    --accent: 225 14% 14%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
-
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 0%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 239 84% 70%;
-
-    /* Sidebar - Dark mode */
-    --sidebar-background: 222 47% 9%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 239 84% 70%;
-    --sidebar-primary-foreground: 222 47% 7%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 239 84% 70%;
-
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(239 84% 70%) 0%, hsl(217 91% 65%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(173 80% 45%) 0%, hsl(186 69% 50%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(239 84% 70% / 0.15) 0%, hsl(173 80% 45% / 0.15) 100%);
-
-    --shadow-soft: 0 2px 8px -2px hsl(220 60% 5% / 0.3), 0 4px 16px -4px hsl(220 60% 5% / 0.25);
-    --shadow-medium: 0 4px 12px -3px hsl(220 60% 5% / 0.4), 0 8px 24px -6px hsl(220 60% 5% / 0.35);
-    --shadow-glow: 0 0 25px hsl(239 84% 70% / 0.35);
-    --shadow-emergency: 0 0 35px hsl(0 72% 51% / 0.5);
+    --border: 225 14% 16%;
+    --input: 225 14% 16%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -140,185 +67,72 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Lexend', system-ui, -apple-system, sans-serif;
   }
 
-  /* Smooth theme transitions */
   html {
     @apply transition-colors duration-300;
   }
 }
 
 @layer components {
-  /* Card variants */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 24px);
+  }
+
+  .card-mobile {
+    @apply bg-white rounded-xl p-4 shadow-sm;
+    border: 1px solid hsl(214 83% 51% / 0.05);
+  }
+
   .card-glass {
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 2px 8px -2px hsl(220 20% 10% / 0.08);
   }
 
-  .card-elevated {
-    @apply bg-card border border-border;
-    box-shadow: var(--shadow-medium);
-  }
-
-  /* Primary gradient button */
-  .btn-gradient {
-    background: var(--gradient-primary);
-    @apply text-primary-foreground font-medium transition-all duration-200;
-    box-shadow: var(--shadow-glow);
-  }
-
-  .btn-gradient:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 30px hsl(239 84% 67% / 0.35);
-  }
-
-  /* Accent gradient */
-  .accent-gradient {
-    background: var(--gradient-accent);
-  }
-
-  /* Hero gradient background */
-  .hero-gradient {
-    background: var(--gradient-hero);
-  }
-
-  /* Emergency pulse animation */
-  .emergency-pulse {
-    animation: emergency-pulse 2s ease-in-out infinite;
-    box-shadow: var(--shadow-emergency);
-  }
-
-  @keyframes emergency-pulse {
-    0%, 100% {
-      box-shadow: 0 0 20px hsl(0 84% 60% / 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px hsl(0 84% 60% / 0.6);
-    }
-  }
-
-  /* Category badges */
-  .badge-academic {
-    @apply bg-primary/10 text-primary border border-primary/20;
-  }
-
-  .badge-event {
-    @apply bg-accent/10 text-accent border border-accent/20;
-  }
-
-  .badge-urgent {
-    @apply bg-destructive/10 text-destructive border border-destructive/20;
-  }
-
-  .badge-success {
-    @apply bg-success/10 text-success border border-success/20;
-  }
-
-  .badge-warning {
-    @apply bg-warning/10 text-warning border border-warning/20;
-  }
-
-  /* Attendance status colors */
-  .attendance-safe {
-    @apply text-success;
-  }
-
-  .attendance-warning {
-    @apply text-warning;
-  }
-
-  .attendance-risk {
-    @apply text-destructive;
-  }
-
-  /* Skeleton loading animation */
-  .skeleton-shimmer {
-    @apply bg-muted/60 animate-pulse rounded;
-  }
-
-  /* Smooth page transitions */
-  .page-transition {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  /* Glass morphism effect */
-  .glass {
-    @apply bg-background/60 backdrop-blur-xl border border-border/30;
-  }
-
-  /* Interactive hover states */
   .interactive-card {
-    @apply transition-all duration-200 hover:shadow-lg hover:border-primary/30 cursor-pointer;
+    @apply transition-all duration-200 hover:shadow-lg cursor-pointer;
   }
 
   .interactive-card:hover {
     transform: translateY(-2px);
   }
 
-  /* AI Badge styling */
-  .ai-badge {
-    background: var(--gradient-primary);
-    @apply text-xs font-semibold px-2 py-0.5 rounded-full text-primary-foreground;
-  }
-
-  /* Priority indicators */
-  .priority-high {
-    @apply bg-destructive/20 text-destructive border-l-4 border-destructive;
-  }
-
-  .priority-medium {
-    @apply bg-warning/20 text-warning border-l-4 border-warning;
-  }
-
-  .priority-low {
-    @apply bg-success/20 text-success border-l-4 border-success;
-  }
-
-  /* Scrollbar styling */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted/30 rounded-full;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
-  }
-
-  /* Focus ring */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
-  }
-}
-
-@layer utilities {
-  /* Text gradients */
   .text-gradient {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, hsl(214 83% 51%) 0%, hsl(217 91% 60%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Subtle hover effects */
-  .hover-lift {
-    @apply transition-transform duration-200;
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
   }
 
-  .hover-lift:hover {
-    transform: translateY(-2px);
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
   }
 
-  /* Backdrop blur variants */
-  .blur-soft {
-    backdrop-filter: blur(8px);
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
   }
 
-  .blur-strong {
-    backdrop-filter: blur(20px);
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
   }
 }
