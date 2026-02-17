@@ -81,72 +81,46 @@ const timetableData: Record<string, { time: string; subject: string; room: strin
 };
 
 /* Daily mess menu */
-const dailyMessMenu: Record<number, { meal: string; time: string; icon: string; items: string[] }[]> = {
-    0: [
-        { meal: "Breakfast", time: "08:30 - 09:30", icon: "wb_sunny", items: ["Chole Bhature", "Tea • Pickle • Onion Masala"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Veg Biryani • Mix Raita", "Jeera Aloo • Chapati • Salad"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Samosa / Namkeen • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Egg Bhurji • Paneer Makhani", "Rice • Chapati • Salad"] },
-    ],
-    1: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Coleslaw Sandwich • Cornflakes", "Tea • Milk"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Panchmel • Aloo Gobhi", "Rice • Chapati • Boondi Raita"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Maggi / Pasta • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Sabzi • Dal • Rice", "Chapati • Salad"] },
-    ],
-    2: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Idli • Sambhar • Coconut Chutney", "Tea • Milk"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Rajma Masala • Aloo Capsicum", "Rice • Chapati • Pickle"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Bread Pakora • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Chicken Curry / Paneer Butter", "Rice • Chapati • Salad"] },
-    ],
-    3: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Pav Bhaji • Pickle", "Tea • Milk"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["White Chana • Aloo Gajar Methi", "Rice • Chapati • Raita"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Chips / B-Pakora • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Matar Paneer • Murgh Kolapuri", "Rice • Chapati • Salad"] },
-    ],
-    4: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Methi Parantha • Curd", "Tea • Pickle"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Nutri Matar • Aloo Kadhi", "Rice • Chapati • Fryums"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Aloo Bonda • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Mix Veg • Egg Curry / Paneer", "Rice • Chapati • Salad"] },
-    ],
-    5: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Poori • Aloo Sabzi", "Tea • Milk"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Kadhi Pakoda • Veg Pulao", "Rice • Chapati • Raita"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Veg Cutlet / Momos • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Dal Makhani • Biryani", "Chapati • Salad • Kheer"] },
-    ],
-    6: [
-        { meal: "Breakfast", time: "07:30 - 09:00", icon: "wb_sunny", items: ["Aloo Parantha • Curd • Pickle", "Tea • Milk"] },
-        { meal: "Lunch", time: "12:00 - 01:45", icon: "light_mode", items: ["Chole • Jeera Rice • Boondi Raita", "Chapati • Salad • Pickle"] },
-        { meal: "Snacks", time: "04:30 - 05:15", icon: "cookie", items: ["Samosa • Tea"] },
-        { meal: "Dinner", time: "07:30 - 09:00", icon: "dark_mode", items: ["Chicken / Paneer Tikka Masala", "Rice • Naan • Salad • Gulab Jamun"] },
-    ],
+import { weeklyMenu, daysOfWeek, MealSlot } from "@/data/messMenu";
+
+/* Daily mess menu helper */
+const getTodayMenu = (dayIdx: number): MealSlot[] => {
+    const dayKey = daysOfWeek[dayIdx];
+    return weeklyMenu[dayKey] || [];
 };
 
-function getCurrentMeal(dayMenus: { meal: string; time: string; icon: string; items: string[] }[]) {
+function getCurrentMeal(dayMenus: MealSlot[]) {
     const now = new Date();
     const nowMins = now.getHours() * 60 + now.getMinutes();
+
+    // Mapping ranges to specific meals
     const ranges = [
         { meal: "Breakfast", start: 7 * 60 + 30, end: 9 * 60 + 30 },
         { meal: "Lunch", start: 12 * 60, end: 13 * 60 + 45 },
         { meal: "Snacks", start: 16 * 60 + 30, end: 17 * 60 + 15 },
         { meal: "Dinner", start: 19 * 60 + 30, end: 21 * 60 },
     ];
+
+    // Check if currently serving
     for (const r of ranges) {
         if (nowMins >= r.start && nowMins <= r.end) {
             const found = dayMenus.find((m) => m.meal === r.meal);
             if (found) return { ...found, status: "now" as const };
         }
     }
+
+    // Check for next upcoming meal
     for (const r of ranges) {
         if (nowMins < r.start) {
             const found = dayMenus.find((m) => m.meal === r.meal);
             if (found) return { ...found, status: "upcoming" as const };
         }
     }
+
+    // If all meals over, show tomorrow's breakfast or last meal as fallback
+    // For now, let's just return the last meal as "upcoming" (effectively "was today") 
+    // or maybe the first meal of the day but usually the day flip handles it.
+    // Let's stick to original behavior but strictly typed
     return { ...dayMenus[dayMenus.length - 1], status: "upcoming" as const };
 }
 
@@ -228,22 +202,40 @@ export default function Dashboard() {
         return (ws / tc).toFixed(2);
     }, []);
 
-    const todayMenu = dailyMessMenu[jsDay] || dailyMessMenu[0];
+    // Use shared data
+    const todayMenu = useMemo(() => getTodayMenu(jsDay), [jsDay]);
     const currentMeal = useMemo(() => getCurrentMeal(todayMenu), [todayMenu]);
 
+    /* Logic to find live or next class */
     const nextClass = useMemo(() => {
         const dayKey = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][jsDay];
         const c = timetableData[dayKey] || [];
         if (!c.length) return null;
+
         const now = new Date();
         const nowMins = now.getHours() * 60 + now.getMinutes();
+
         for (const cls of c) {
-            const [startStr] = cls.time.split(" - ");
+            const [startStr, endStr] = cls.time.split(" - ");
             const [hh, mm] = startStr.split(":").map(Number);
+            const [eh, em] = endStr.split(":").map(Number);
+
             const startMins = hh < 8 ? (hh + 12) * 60 + mm : hh * 60 + mm;
-            if (startMins > nowMins) return cls;
+            const endMins = eh < 8 ? (eh + 12) * 60 + em : eh * 60 + em;
+
+            // Check if LIVE
+            if (nowMins >= startMins && nowMins < endMins) {
+                return { ...cls, status: "live" as const };
+            }
+
+            // Check if UPCOMING (next immediate class)
+            if (startMins > nowMins) {
+                return { ...cls, status: "upcoming" as const };
+            }
         }
-        return c[c.length - 1];
+
+        // If no more classes, return the last one (or handle differently in UI)
+        return null;
     }, [jsDay]);
 
     /* ── Theme-aware base colors matching the screenshot ── */
@@ -328,11 +320,21 @@ export default function Dashboard() {
                                     <div className="flex transition-transform duration-300 ease-out" style={{ transform: `translateX(-${upNextCard * 100}%)` }}>
                                         {/* Card 1: Up Next Class */}
                                         <div className="w-full flex-shrink-0">
-                                            <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-800 p-4 text-white relative overflow-hidden shadow-lg shadow-blue-500/20">
+                                            <div className={`rounded-2xl p-4 text-white relative overflow-hidden shadow-lg ${nextClass?.status === "live" ? "bg-gradient-to-br from-red-600 to-red-800 shadow-red-500/20" : "bg-gradient-to-br from-blue-600 to-indigo-800 shadow-blue-500/20"}`}>
                                                 <div className="absolute -top-4 -right-4 size-16 rounded-full bg-white/10" />
                                                 <div className="absolute bottom-0 right-2 size-10 rounded-full bg-white/5" />
                                                 <div className="relative z-10">
-                                                    <span className="text-[9px] font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">Up Next</span>
+                                                    {nextClass?.status === "live" ? (
+                                                        <div className="flex items-center gap-2 mb-2">
+                                                            <span className="relative flex size-2.5">
+                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                                                <span className="relative inline-flex rounded-full size-2.5 bg-white"></span>
+                                                            </span>
+                                                            <span className="text-[10px] font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">Live Now</span>
+                                                        </div>
+                                                    ) : (
+                                                        <span className="text-[9px] font-bold uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">Up Next</span>
+                                                    )}
                                                     {nextClass ? (
                                                         <div className="mt-2">
                                                             <h3 className="text-base font-bold mb-2 leading-snug">{nextClass.subject.split("(")[0].trim()}</h3>
@@ -358,7 +360,7 @@ export default function Dashboard() {
                                                         <span className="flex items-center gap-1 text-xs text-white/80"><span className="material-symbols-outlined text-sm">{currentMeal.icon}</span>{currentMeal.time}</span>
                                                     </div>
                                                     <h3 className="text-base font-bold mb-1.5">{currentMeal.meal}</h3>
-                                                    {currentMeal.items.map((item, i) => (<p key={i} className="text-xs text-white/85 leading-relaxed">{item}</p>))}
+                                                    {currentMeal.items.map((item, i) => (<p key={i} className="text-xs text-white/85 leading-relaxed">{item.item}</p>))}
                                                     <button onClick={() => navigate("/campus-dining")} className="mt-2 text-[10px] font-bold bg-white/20 px-2.5 py-1 rounded-full hover:bg-white/30 transition-all">Full Menu →</button>
                                                 </div>
                                             </div>
